@@ -9,7 +9,3 @@ Repo này chứa:
 Mục tiêu:
 - Giúp AI sinh code sạch hơn
 - Tuân theo chuẩn project
-
-## Cách sử dụng
-
-Thêm thư mục `.agent` vào project:
