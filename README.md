@@ -28,11 +28,23 @@ Hệ thống điều khiển Agent được phân tách thành 2 module chính:
 
 ## 🚀 Hướng dẫn tích hợp (Setup & Usage)
 
-Để AI Assistant có thể "học" được bộ quy tắc này, cấu hình rất đơn giản:
+Để AI Assistant (đặc biệt là các Agent như **Antigravity**) có thể "gắn kết" và học được bộ quy tắc này, bạn có thể thiết lập theo các cách sau:
 
-1. Clone nội dung của repository này.
-2. Đặt hợp nhất thư mục (`rules/`, `skills/`) trực tiếp vào vị trí khai báo dành riêng cho AI Workspace trong dự án của bạn (VD: thư mục quản lý `.agent` / `.gemini` hoặc tùy thuộc cấu hình IDE).
-3. Agent khi được invoke sẽ lập tức kế thừa toàn bộ bộ DNA kỹ thuật này.
+### Cách 1: Sử dụng Git Submodule (Khuyên dùng)
+Đây là cách tối ưu nhất để đồng bộ và tái sử dụng bộ Agent trên nhiều dự án khác nhau. Ngay tại thư mục root của dự án mục tiêu, chạy:
+```bash
+git submodule add <link-github-repo-ai-agent> .agent
+```
+*(Đối với hệ thống Antigravity, bạn có thể dùng tên thư mục là `.agent` hoặc `.gemini`)*
+
+### Cách 2: Copy thư mục thủ công
+1. Clone repository này về máy.
+2. Đặt hợp nhất thư mục (`rules/`, `skills/`) trực tiếp vào cấu trúc dự án của bạn (thường là thư mục quản lý như `.agent` / `.gemini` ở root).
+
+### 💡 Thủ thuật "Prompt Injection" để khởi động (Rất quan trọng)
+Dù bạn dùng cách tích hợp nào, ngay ở **prompt đầu tiên** khi bắt đầu một phiên làm việc mới (New Chat / New Task), hãy dán câu lệnh sau vào khung chat để đảm bảo Agent nắm rõ toàn bộ quy định trước khi vào việc:
+
+> *"Tôi muốn thực hiện [viết mục tiêu của bạn vào đây]. Trước khi bắt đầu, hãy tìm, đọc và áp dụng triệt để nội dung tư duy trong `.agent/rules/GEMINI.md` cùng các tiêu chuẩn trong thư mục `.agent/skills/` làm cơ sở phân tích và đưa ra kế hoạch."*
 
 ---
 *Built with ❤️ for High-Performance Vibecoding.*
