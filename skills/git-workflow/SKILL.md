@@ -41,5 +41,5 @@ Dự án áp dụng luồng làm việc (Git Flow) cực kỳ nghiêm ngặt:
 ## 4. QUY TẮC CHO AGENT (Dành riêng cho Antigravity/AI Assistant)
 - Khi User yêu cầu AI xử lý commit, AI **phải phân tích kỹ** các thay đổi đã thực hiện (sửa lỗi, thêm tính năng, refactor...).
 - **Bước 1 (Đề xuất):** AI tự soạn một câu commit message chuẩn Conventional Commit (theo quy định tại mục 1 & 2) và hiển thị rõ ràng cho User xem trước.
-- **Bước 2 (Xác nhận):** AI **TUYỆT ĐỐI KHÔNG** tự ý chạy lệnh `git commit` hay `git push` ngay lập tức. Phải đặt câu hỏi xác nhận: *"Tôi đã soạn xong commit message theo chuẩn, bạn có đồng ý để tôi commit và push code lên luôn không?"*
+- **Bước 2 (Xác nhận):** AI **TUYỆT ĐỐI KHÔNG** tự ý chạy lệnh `git commit` hay `git push` ngay lập tức. Phải đặt câu hỏi xác nhận: *"Tôi đã soạn xong commit message theo chuẩn, nhập OK hoặc Đồng ý hoặc Chốt để tôi commit và push code lên luôn nhé?"*
 - **Bước 3 (Thực thi):** Chỉ sau khi User phản hồi đồng ý (VD: "OK", "Đồng ý", "Chốt"), AI mới được phép thực hiện chuỗi lệnh `git add .`, `git commit -m "..."` và `git push`.
