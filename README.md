@@ -17,6 +17,8 @@ Hệ thống điều khiển Agent được phân tách thành 2 module chính:
 - 🛠️ **`/skills`**: Bộ tiêu chuẩn kỹ thuật chuyên môn chuyên sâu.
   - **Clean Code** (`/skills/clean-code`): Quy tắc định danh (Naming), cấu trúc file, Strong Typing và tối ưu logic.
   - **Frontend Design** (`/skills/frontend-design`): Kiến trúc giao diện Vue 3 (Composition API, Pinia, UI/UX Micro-animations, Performance).
+  - **API Integration** (`/skills/api-integration`): Kiến trúc BaseClient, xử lý lỗi tập trung, DTOs và nguyên tắc gọi API từ lớp Service.
+  - **Git & Commit Workflow** (`/skills/git-workflow`): Chuẩn Conventional Commits, quy trình rẽ nhánh kiểm soát chặt chẽ tích hợp mã Jira.
 
 ## 🎯 Mục tiêu cốt lõi
 
