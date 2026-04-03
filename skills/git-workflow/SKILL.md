@@ -39,5 +39,5 @@ Dự án áp dụng luồng làm việc (Git Flow) cực kỳ nghiêm ngặt:
 - Luôn nhớ `pull` code trước khi `push` và merge.
 
 ## 4. QUY TẮC CHO AGENT
-- Khi User yêu cầu AI kiểm tra source và commit thay, AI AI **phân tích kỹ** mình đã sửa lỗi hay thêm tính năng gì vào thư mục nào. 
-- Sau đó, tự tổ chức 1 câu commit chuẩn Conventional Commit thay vì phang bừa `git commit -m "update code"`. Mọi chi tiết râu ria có thể thả ở phần body của commit nếu thay đổi quá lớn.
+- Khi User yêu cầu AI kiểm tra source và commit thay, AI **phải phân tích kỹ** mình đã sửa lỗi hay thêm tính năng gì vào thư mục nào. 
+- Sau đó, tự tổ chức 1 câu commit chuẩn Conventional Commit thay vì commit bừa `git commit -m "update code"`. Mọi chi tiết dư thừa có thể mô tả ở phần body của commit nếu thay đổi quá lớn.
