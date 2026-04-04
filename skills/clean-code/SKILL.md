@@ -27,12 +27,12 @@ description: Best practices cho việc viết mã nguồn sạch và dễ bảo 
 4. **Tránh Magic Values:**
    - Không sử dụng các giá trị số, chuỗi, boolean mà không có giải thích.
    - Thay vào đó, sử dụng hằng số (constant) hoặc biến có ý nghĩa.
-   * Tốt: `const MAX_LOGIN_ATTEMPTS = 3;`
-   * Không tốt: `if (attempts > 3) { ... }`
+   - Tốt: `const MAX_LOGIN_ATTEMPTS = 3;`
+   - Không tốt: `if (attempts > 3) { ... }`
 
 5. **Early Return:**
    - Sử dụng early return để giảm độ sâu của code.
-   - Tránh lồng ghép điều kiện quá sâu (nested if)- tối đa 2 level.
+   - Tránh lồng ghép điều kiện quá sâu (nested if) - tối đa 2 level.
 
 6. **DRY (Don't Repeat Yourself):**
    - Tránh lặp lại code.
@@ -40,8 +40,8 @@ description: Best practices cho việc viết mã nguồn sạch và dễ bảo 
 
 7. **Import Style:**
    - Tránh import sâu.
-   * Tốt: `import { Button } from "@/components";`
-   * Không tốt: `import Button from '../../../../../components/Button';`
+   - Tốt: `import { Button } from "@/components";`
+   - Không tốt: `import Button from '../../../../../components/Button';`
 
 8. **Tư duy lập trình:**
    - Luôn suy nghĩ về việc tối ưu hóa code.
