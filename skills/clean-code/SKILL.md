@@ -50,7 +50,10 @@ description: Best practices cho việc viết mã nguồn sạch và dễ bảo 
 
 9. **Data Types / Strong Typing:**
    - Nếu dự án sử dụng TypeScript, hạn chế tối đa việc sử dụng `any`.
-   - Khai báo rõ interface, type cho dữ liệu trả về từ API và Props/Params của Component/Function.
+   - **Explicit Typing:** Khai báo rõ interface, type cho:
+     - Dữ liệu trả về từ API.
+     - Props / Params của Component và Function.
+     - **Biến nội bộ (Local variables) & Hằng số:** Tuyệt đối không để kiểu ngầm định nếu giá trị khởi tạo không đủ để TS suy luận chính xác (ví dụ: khởi tạo mảng rỗng `[]` hoặc `null`).
 
 10. **Library & Framework:**
     - **Native First:** Ưu tiên sử dụng các phương thức Native JS (ES6+) cho các tác vụ đơn giản.

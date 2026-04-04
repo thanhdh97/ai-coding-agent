@@ -10,7 +10,8 @@ Bộ tiêu chuẩn dành riêng cho việc phát triển giao diện (Frontend) 
 ## 1. MÔ HÌNH COMPONENT (ARCHITECTURE)
 - **Smart vs. Dumb Components:** Tách biệt rõ ràng giữa Presentational Component (chỉ nhận props và emit event, không gọi API) và Container Component (chứa logic nặng, gọi API, xử lý state lớn).
 - **Atomic Design:** Ưu tiên chia nhỏ UI thành các hạt nhân độc lập (Atoms, Molecules, Organisms). Tránh xây dựng các file `.vue` quá khổng lồ (khuyến nghị < 250 dòng code/file).
-- **Composition API First:** Bắt buộc sử dụng `<script setup>` cho các component. Khuyến khích gom nhóm logic theo tính năng (Feature-based) thông qua các Custom Composables (`useSomething.ts`).
+- **Composition API First:** Bắt buộc sử dụng `<script setup lang="ts">` cho các component. Khuyến khích gom nhóm logic theo tính năng (Feature-based) thông qua các Custom Composables (`useSomething.ts`). 
+- **Strong Typing in Script:** Mọi biến `ref`, `reactive`, `computed` PHẢI được định nghĩa kiểu (Types/Interfaces) rõ ràng. Tránh để TypeScript tự suy diễn kiểu `any` hoặc `unknown`.
 
 ## 2. QUẢN LÝ TRẠNG THÁI (STATE MANAGEMENT)
 - **Local State (`ref`, `reactive`):** Dùng cho trạng thái nội bộ của một Component đơn lẻ (như form input, toggle modal...).
