@@ -17,7 +17,7 @@ AI Agent **bắt buộc** phải viết unit test cho các thành phần sau:
 *(Lưu ý: Hạn chế viết unit test cho UI component nếu nó chỉ hiển thị đơn thuần, ưu tiên test logic).*
 
 ## 2. QUY TRÌNH & CẤU TRÚC FILE
-- **Vị trí:** File test phải nằm ngay cạnh file logic được test hoặc trong thư mục `__tests__` cùng cấp.
+- **Vị trí:** File test nằm trong thư mục `__tests__` cùng cấp.
 - **Đặt tên:** `[filename].spec.ts` hoặc `[filename].test.ts`.
 - **Cấu trúc test case (AAA Pattern):**
   - **Arrange:** Chuẩn bị dữ liệu mẫu (mock data), khởi tạo đối tượng.
