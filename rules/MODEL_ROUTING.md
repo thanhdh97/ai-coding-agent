@@ -10,7 +10,7 @@ Bộ quy tắc này định nghĩa cách thức AI Agent nhận diện và phân
 
 **TUYỆT ĐỐI TUÂN THỦ** nguyên tắc: Chất lượng của mã nguồn (bug-free, chuẩn conventions, đúng cấu trúc) là số một. Nếu model được assign yếu hơn yêu cầu thực tế, phải ngay lập tức báo cho User hoặc chuyển task sang model cấp cao hơn.
 
-### 🟢 1.1 TIER 1 (TỐI A SỨC MẠNH & TƯ DUY KIẾN TRÚC)
+### 🟢 1.1 TIER 1 (TỐI ĐA SỨC MẠNH & TƯ DUY KIẾN TRÚC)
 **Models:** `Claude Sonnet 4.6 (Thinking)`, `Claude Opus 4.6 (Thinking)`
 Sử dụng Claude khi đối mặt với:
 -   **Khởi tạo Kiến trúc / Refactor sâu:** Chuyển đổi mô hình component lớn, thiết kế Custom Composables, chia tách API module, hay xây dựng các hook phức tạp.
