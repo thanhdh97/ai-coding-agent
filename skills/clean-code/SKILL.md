@@ -78,7 +78,12 @@ description: Best practices cho việc viết mã nguồn sạch và dễ bảo 
       ├── pages/            # (Tùy chọn) Chứa các component đại diện cho từng trang nếu module có nhiều màn hình
       └── index.ts          # File export các thành phần ra bên ngoài (Public API)
       ```
-    - **Folder-only Component & Barrel Export:** Các component phải được tổ chức theo dạng thư mục riêng (ví dụ: `components/Header/index.tsx`). Đồng thời, thư mục cha (như `components/`) nên có một file `index.ts` để gom các component lại nhằm tránh import sâu theo quy tắc số 7.
+    - **Folder-only Component & Barrel Export:** 
+      - Các component phải được tổ chức theo dạng thư mục riêng (ví dụ: `components/Header/index.tsx`). 
+      - Thư mục cha (như `components/`) nên có một file `index.ts` để gom các component lại nhằm tránh import sâu theo quy tắc số 7.
+      - **Component Granularity (Quy mô Component):** 
+        - Với các Component nhỏ/phụ trợ (Sub-components) bên trong một Module lớn: Giữ Logic (hooks), Types, và Helpers ở tầng Module cha (`src/modules/FeatureName/hooks/`, `src/modules/FeatureName/types/`) thay vì tạo các file này bên trong folder component. Việc này giúp folder component chỉ tập trung vào UI (Dumb/Presentational) và tránh làm rác thư mục.
+        - Chỉ khi Component trở nên cực kỳ phức tạp hoặc là một Feature độc lập, mới cân nhắc tách logic/types vào folder riêng của nó.
 
 12. **Formatting, Linting & Code Review:**
     - Đảm bảo thực hiện auto-format trước khi commit (sử dụng prettier/eslint).
