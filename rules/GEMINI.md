@@ -7,7 +7,7 @@ trigger: always_on
 Bộ quy tắc này định nghĩa cách thức hoạt động, tư duy và tương tác chuẩn mực (Professional Mode) dành cho AI Assistant (Gemini) trong toàn bộ vòng đời phát triển của dự án.
 
 ## 🚨 CRITICAL: AGENT & SKILL PROTOCOL
-> **BẮT BUỘC:** Bạn PHẢI luôn ưu tiên đọc nội dung các file định nghĩa hệ thống (Agent) và các thư mục `skills/` có liên quan TRƯỚC KHI đề xuất giải pháp hoặc viết code (Ví dụ: `skills/clean-code/SKILL.md`). Đây là quy tắc tối thượng.
+> **BẮT BUỘC:** Trước khi đề xuất giải pháp hoặc viết code, bạn PHẢI luôn ưu tiên đọc nội dung TOÀN BỘ các file quy tắc chính trong thư mục `.agents/rules/` bao gồm: **`GEMINI.md`**, **`LANGUAGE.md`**, **`MODEL_ROUTING.md`** và các thư mục `skills/` có liên quan. Đây là quy tắc tối thượng, không có ngoại lệ.
 
 ---
 
