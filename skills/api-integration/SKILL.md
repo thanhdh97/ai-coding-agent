@@ -36,22 +36,22 @@ Mọi API endpoint phải được đóng gói bên trong một Service Class. C
 
 ```ts
 // src/services/userService.ts
-import { apiClient } from "@/core/api"; // Client khởi tạo từ BaseClient
-import { IResponse } from "@/interfaces";
+import { apiClient } from '@/core/api'; // Client khởi tạo từ BaseClient
+import { IResponse } from '@/interfaces';
 
 class UserService {
   /**
    * Phương thức mẫu lấy thông tin profile
    */
   async getProfile(): Promise<IResponse> {
-    return await apiClient.get("/v1/user/profile");
+    return await apiClient.get('/v1/user/profile');
   }
 
   /**
    * Phương thức mẫu cập nhật profile
    */
   async updateProfile(data: any): Promise<IResponse> {
-    return await apiClient.post("/v1/user/profile", data);
+    return await apiClient.post('/v1/user/profile', data);
   }
 }
 
@@ -66,7 +66,8 @@ Tại Component (Vue Component, React Component, Server Actions), chúng ta ch�
 ```ts
 // Cách gọi chung cho mọi Framework
 const handleFetchData = async () => {
-  const { data, error, message: msg } = await userService.getProfile();
+  isLoading.value = true
+  const { data, error, message: msg } = await userService.getProfile()..finally(() => (isLoading.value = false));;
 
   if (error) {
     return;
