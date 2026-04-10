@@ -66,6 +66,19 @@ description: Best practices cho việc viết mã nguồn sạch và dễ bảo 
     - Giữ file nhỏ gọn, tập trung.
     - Một file chỉ nên chứa một Component hoặc một logic group duy nhất (1 File = 1 Component).
     - Tính nhất quán trong cách đặt tên thư mục và file phải được tuân thủ tùy theo tiêu chuẩn của framework.
+    - **Feature Module:** Khi thêm mới 1 tính năng, phải tạo 1 module mới chuyên biệt. Cấu trúc thư mục của một feature module tiêu chuẩn nên bao gồm:
+      ```text
+      src/modules/FeatureName/
+      ├── components/       # Các UI components dùng riêng cho module này
+      │   └── index.ts      # File export các component con (Barrel Export) để hỗ trợ Import Style
+      ├── constants/        # Các hằng số, cấu hình tĩnh riêng của module
+      ├── types/            # Định nghĩa TypeScript interfaces/types tương ứng
+      ├── helpers/          # (hoặc utils) Các hàm tiện ích, xử lý logic nội bộ
+      ├── hooks/            # Custom hooks chứa logic hoặc xử lý API/Data nội bộ
+      ├── pages/            # (Tùy chọn) Chứa các component đại diện cho từng trang nếu module có nhiều màn hình
+      └── index.ts          # File export các thành phần ra bên ngoài (Public API)
+      ```
+    - **Folder-only Component & Barrel Export:** Các component phải được tổ chức theo dạng thư mục riêng (ví dụ: `components/Header/index.tsx`). Đồng thời, thư mục cha (như `components/`) nên có một file `index.ts` để gom các component lại nhằm tránh import sâu theo quy tắc số 7.
 
 12. **Formatting, Linting & Code Review:**
     - Đảm bảo thực hiện auto-format trước khi commit (sử dụng prettier/eslint).
