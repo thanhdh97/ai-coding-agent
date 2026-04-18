@@ -46,7 +46,7 @@ Dự án áp dụng luồng làm việc (Git Flow) cực kỳ nghiêm ngặt:
 - **Bước 3 (Thực thi):** Ngay sau khi User chốt thông điệp cuối cùng (bằng cách nói OK hoặc cung cấp message mới), AI **CHỦ ĐỘNG** thực hiện chuỗi lệnh `git add .`, `git commit -m "..."` và `git push`. **Lưu ý:** AI đặt `SafeToAutoRun: true` cho lệnh này vì User đã duyệt nội dung commit ở bước trước, tránh việc hỏi đi hỏi lại gây rườm rà.
 
 ## 5. QUY TRÌNH TẠO MERGE REQUEST (MR) AUTOMATION
-Sau khi commit và push code ở nhánh local thành công, AI Agent **bắt buộc** phải chủ động đặt câu hỏi cho User: *"Bạn có muốn tôi tự động tạo Merge Request 1 (từ nhánh local lên nhánh feature) không?"*
-
-- **MR 1 (Local => Feature):** Nếu User đồng ý (VD: "OK", "Tạo đi"), AI sẽ tự động sử dụng GitLab CLI (`glab mr create...`) để mở sự kiện Merge Request đi từ nhánh cá nhân (VD: `thanhdh/12348`) vào nhánh tính năng (VD: `feature/12348`). **Quan trọng:** Ngay sau khi lệnh tạo MR thành công, AI **bắt buộc** phải dùng lệnh để tự động bật URL của MR đó lên trên trình duyệt của User (dùng lệnh `glab mr view --web` hoặc `xdg-open <URL>`). User KHÔNG cần tự copy hay click link bằng tay.
-- **MR 2 (Feature => Testing):** Tạm thời luồng này User sẽ tự thao tác tạo thủ công trên GitLab chờ khi MR 1 được merge vào. AI **KHÔNG** tự động tạo MR 2.
+- **Luồng mặc định:** Sau khi commit và push code ở nhánh local thành công, AI Agent **chủ động** đặt câu hỏi: *"Bạn có muốn tôi tự động tạo Merge Request 1 (từ nhánh local lên nhánh feature) không?"*
+- **Luồng gộp (Combo):** Nếu ngay từ đầu User yêu cầu gộp (VD: "Commit và tạo Merge Request cho tôi"), thì sau khi User duyệt Commit Message, AI sẽ **TỰ ĐỘNG** thực hiện chuỗi: `Add` ➔ `Commit` ➔ `Push` ➔ `Tạo MR 1` ➔ `Mở Browser` luôn mà **không cần hỏi lại**.
+- **MR 1 (Local => Feature):** AI sử dụng GitLab CLI (`glab mr create...`). Ngay sau đó, AI bắt buộc phải dùng lệnh `glab mr view --web` hoặc `xdg-open` để bật MR lên trình duyệt.
+- **MR 2 (Feature => Testing):** User tự thao tác thủ công sau khi MR 1 được merge.
