@@ -30,8 +30,8 @@ Mọi lịch sử commit do AI tạo ra hoặc User tự viết đều phải tu
 
 ## 3. QUY TRÌNH PHÂN NHÁNH VÀ MERGE (GIT FLOW)
 Dự án áp dụng luồng làm việc (Git Flow) cực kỳ nghiêm ngặt:
-- **Tạo nhánh Feature:** Luôn phải tạo nhánh `feature/<MÃ_JIRA>` tách ra từ nhánh gốc `master` (Ví dụ: `feature/CS-12348`).
-- **Tạo nhánh Local/Dev:** Để code thực tế, Dev rẽ một nhánh cá nhân từ nhánh feature theo cú pháp `<tên_dev>/<MÃ_JIRA>` (Ví dụ: `thanhdh/CS-12348`).
+- **Tạo nhánh Feature:** Luôn phải tạo nhánh `feature/<MÃ_SỐ>` (chỉ lấy phần số của task) tách ra từ nhánh gốc `master` (Ví dụ: `feature/12348`).
+- **Tạo nhánh Local/Dev:** Để code thực tế, Dev rẽ một nhánh cá nhân từ nhánh feature theo cú pháp `<tên_dev>/<MÃ_SỐ>` (Ví dụ: `thanhdh/12348`).
 - **Quy trình Merge:** 
   - Code xong ở local branch thì đẩy lại vào feature branch: `nhánh local => nhánh feature` để đem đi Testing.
   - **NGHIÊM CẤM:** Lập trình viên tuyệt đối **KHÔNG ĐƯỢC PHÉP** tự ý merge trực tiếp bất kỳ nhánh nào vào `master`.
@@ -43,3 +43,9 @@ Dự án áp dụng luồng làm việc (Git Flow) cực kỳ nghiêm ngặt:
 - **Bước 1 (Đề xuất):** AI tự soạn một câu commit message chuẩn Conventional Commit (theo quy định tại mục 1 & 2) và hiển thị rõ ràng cho User xem trước.
 - **Bước 2 (Xác nhận):** AI **TUYỆT ĐỐI KHÔNG** tự ý chạy lệnh `git commit` hay `git push` ngay lập tức. Phải đặt câu hỏi xác nhận: *"Tôi đã soạn xong commit message theo chuẩn, nhập OK hoặc Đồng ý hoặc Chốt để tôi commit và push code lên luôn nhé?"*
 - **Bước 3 (Thực thi):** Chỉ sau khi User phản hồi đồng ý (VD: "OK", "Đồng ý", "Chốt"), AI mới được phép thực hiện chuỗi lệnh `git add .`, `git commit -m "..."` và `git push`.
+
+## 5. QUY TRÌNH TẠO MERGE REQUEST (MR) AUTOMATION
+Sau khi commit và push code ở nhánh local thành công, AI Agent **bắt buộc** phải chủ động đặt câu hỏi cho User: *"Bạn có muốn tôi tự động tạo Merge Request 1 (từ nhánh local lên nhánh feature) không?"*
+
+- **MR 1 (Local => Feature):** Nếu User đồng ý (VD: "OK", "Tạo đi"), AI sẽ tự động sử dụng GitLab CLI (`glab mr create...`) để mở sự kiện Merge Request đi từ nhánh cá nhân (VD: `thanhdh/12348`) vào nhánh tính năng (VD: `feature/12348`). **Quan trọng:** Ngay sau khi lệnh tạo MR thành công, AI **bắt buộc** phải dùng lệnh để tự động bật URL của MR đó lên trên trình duyệt của User (dùng lệnh `glab mr view --web` hoặc `xdg-open <URL>`). User KHÔNG cần tự copy hay click link bằng tay.
+- **MR 2 (Feature => Testing):** Tạm thời luồng này User sẽ tự thao tác tạo thủ công trên GitLab chờ khi MR 1 được merge vào. AI **KHÔNG** tự động tạo MR 2.
