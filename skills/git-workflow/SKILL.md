@@ -40,9 +40,10 @@ Dự án áp dụng luồng làm việc (Git Flow) cực kỳ nghiêm ngặt:
 
 ## 4. QUY TẮC CHO AGENT (Dành riêng cho Antigravity/AI Assistant)
 - Khi User yêu cầu AI xử lý commit, AI **phải phân tích kỹ** các thay đổi đã thực hiện (sửa lỗi, thêm tính năng, refactor...).
-- **Bước 1 (Đề xuất):** AI tự soạn một câu commit message chuẩn Conventional Commit (theo quy định tại mục 1 & 2) và hiển thị rõ ràng cho User xem trước.
-- **Bước 2 (Xác nhận):** AI **TUYỆT ĐỐI KHÔNG** tự ý chạy lệnh `git commit` hay `git push` ngay lập tức. Phải đặt câu hỏi xác nhận: *"Tôi đã soạn xong commit message theo chuẩn, nhập OK hoặc Đồng ý hoặc Chốt để tôi commit và push code lên luôn nhé?"*
-- **Bước 3 (Thực thi):** Chỉ sau khi User phản hồi đồng ý (VD: "OK", "Đồng ý", "Chốt"), AI mới được phép thực hiện chuỗi lệnh `git add .`, `git commit -m "..."` và `git push`.
+- **Bước 2 (Xác nhận & Chỉnh sửa):** AI đặt câu hỏi xác nhận: *"Tôi đã soạn xong commit message theo chuẩn, bạn có muốn chỉnh sửa gì không hay nhập OK/Đồng ý để tôi commit luôn nhé?"*. 
+    - Nếu User phản hồi "OK/Đồng ý": AI dùng message đã đề xuất ở Bước 1.
+    - Nếu User cung cấp một message mới (VD: "Sửa lại thành: fix logic issue"): AI sẽ ghi nhận message mới này.
+- **Bước 3 (Thực thi):** Ngay sau khi User chốt thông điệp cuối cùng (bằng cách nói OK hoặc cung cấp message mới), AI **CHỦ ĐỘNG** thực hiện chuỗi lệnh `git add .`, `git commit -m "..."` và `git push`. **Lưu ý:** AI đặt `SafeToAutoRun: true` cho lệnh này vì User đã duyệt nội dung commit ở bước trước, tránh việc hỏi đi hỏi lại gây rườm rà.
 
 ## 5. QUY TRÌNH TẠO MERGE REQUEST (MR) AUTOMATION
 Sau khi commit và push code ở nhánh local thành công, AI Agent **bắt buộc** phải chủ động đặt câu hỏi cho User: *"Bạn có muốn tôi tự động tạo Merge Request 1 (từ nhánh local lên nhánh feature) không?"*
