@@ -7,46 +7,70 @@ description: Tiêu chuẩn về cấu trúc Git Commit và thao tác quản lý 
 
 Bộ tiêu chuẩn giúp lịch sử mã nguồn luôn chuyên nghiệp, rõ ràng, dễ trace bug và hỗ trợ tối đa việc tự động hóa tạo Changelog.
 
+> [!IMPORTANT]
+> **Quy tắc vàng:** Luôn `git pull --rebase` trước khi `push` để tránh tạo ra các merge commit không cần thiết và giữ lịch sử tuyến tính.
+
 ## 1. CHUẨN MỰC BẮT BUỘC (CONVENTIONAL COMMITS & JIRA TRACE)
-Mọi lịch sử commit do AI tạo ra hoặc User tự viết đều phải tuân thủ chuẩn Conventional Commits kèm theo **Mã Task Jira** để tracking công việc.
+
+Mọi commit phải tuân thủ chuẩn **Conventional Commits** kèm theo **Mã Ticket Jira** đầy đủ (bao gồm cả prefix).
+
 **Định dạng bắt buộc:**
 `<type>[optional scope]: [MÃ_TICKET] <description>`
 
-*(Ví dụ chuẩn: `feat(auth): [CS-12348] add google standard oauth login`)*
+*Ví dụ chuẩn: `feat(auth): [CS-12348] add google standard oauth login`*
 
 **Các `<type>` quy định hợp lệ:**
-- `feat:` Khi phát triển, thêm mới một tính năng (feature) hoàn chỉnh.
-- `fix:` Khi vá (patch) bug cho một tính năng hiện có.
-- `refactor:` Khi cấu trúc lại/tối ưu code mà không làm thay đổi behavior đầu ra (VD: tách component).
-- `chore:` Các tác vụ bảo trì siêu nhỏ, cài đặt npm package mới, config linter.
-- `style:` Sửa format code (khoảng trắng, dấu chấm phẩy, tab).
-- `docs:` Thay đổi nội dung của các file tài liệu.
+- `feat:` Thêm mới một tính năng (feature) hoàn chỉnh.
+- `fix:` Vá bug cho một tính năng hiện có.
+- `refactor:` Tối ưu code mà không thay đổi behavior (VD: tách component).
+- `chore:` Tác vụ bảo trì, cài đặt package, config linter.
+- `style:` Sửa format code (khoảng trắng, tab, semi-colon).
+- `docs:` Thay đổi nội dung tài liệu.
 
 ## 2. QUY TẮC MÔ TẢ MESSAGE
-- **Bắt buộc có tiền tố Jira:** AI khi đề xuất lệnh commit LUÔN nhắc User cung cấp, hoặc tự tìm mã JIRA (như `CS-12348`) từ tên branch để chèn vào message.
-- **Ngắn gọn & Vào thẳng vấn đề:** Phần description sau mã Jira không nên dài quá 70 ký tự.
-- **Có Context:** Tránh tuyệt đối các message rác như `fix fix`, `up code`, `asdasd`.
-- **Scope (Tùy chọn):** Gắn module thao tác để khoanh vùng chức năng (Ví dụ: `fix(payment): [CS-55555] update currency format`).
+- **Tiền tố Jira:** Agent LUÔN phải tìm hoặc hỏi mã JIRA (VD: `CS-12348`) để chèn vào message.
+- **Ngắn gọn:** Description không dài quá 72 ký tự.
+- **Thì hiện tại:** Sử dụng câu mệnh lệnh (VD: "add", "fix", "update" thay vì "added", "fixed").
+- **Scope (Tùy chọn):** Gắn module để khoanh vùng chức năng (VD: `fix(api): [CS-5555] fix timeout handling`).
 
-## 3. QUY TRÌNH PHÂN NHÁNH VÀ MERGE (GIT FLOW)
-Dự án áp dụng luồng làm việc (Git Flow) cực kỳ nghiêm ngặt:
-- **Tạo nhánh Feature:** Luôn phải tạo nhánh `feature/<MÃ_SỐ>` (chỉ lấy phần số của task) tách ra từ nhánh gốc `master` (Ví dụ: `feature/12348`).
-- **Tạo nhánh Local/Dev:** Để code thực tế, Dev rẽ một nhánh cá nhân từ nhánh feature theo cú pháp `<tên_dev>/<MÃ_SỐ>` (Ví dụ: `thanhdh/12348`).
-- **Quy trình Merge:** 
-  - Code xong ở local branch thì đẩy lại vào feature branch: `nhánh local => nhánh feature` để đem đi Testing.
-  - **NGHIÊM CẤM:** Lập trình viên tuyệt đối **KHÔNG ĐƯỢC PHÉP** tự ý merge trực tiếp bất kỳ nhánh nào vào `master`.
-- **Triển khai (Deploy):** Quyền merge vào `master` và release deploy được cấp độc quyền cho **Project Manager (PM)** sau khi test xong và có thông báo đẩy tính năng.
-- Luôn nhớ `pull` code trước khi `push` và merge.
+## 3. QUY TRÌNH PHÂN NHÁNH (GIT FLOW)
 
-## 4. QUY TẮC CHO AGENT (Dành riêng cho Antigravity/AI Assistant)
-- Khi User yêu cầu AI xử lý commit, AI **phải phân tích kỹ** các thay đổi đã thực hiện (sửa lỗi, thêm tính năng, refactor...).
-- **Bước 2 (Xác nhận & Chỉnh sửa):** AI đặt câu hỏi xác nhận: *"Tôi đã soạn xong commit message theo chuẩn, bạn có muốn chỉnh sửa gì không hay nhập OK/Đồng ý để tôi commit luôn nhé?"*. 
-    - Nếu User phản hồi "OK/Đồng ý": AI dùng message đã đề xuất ở Bước 1.
-    - Nếu User cung cấp một message mới (VD: "Sửa lại thành: fix logic issue"): AI sẽ ghi nhận message mới này.
-- **Bước 3 (Thực thi):** Ngay sau khi User chốt thông điệp cuối cùng (bằng cách nói OK hoặc cung cấp message mới), AI **CHỦ ĐỘNG** thực hiện chuỗi lệnh `git add .`, `git commit -m "..."` và `git push`. **Lưu ý:** AI đặt `SafeToAutoRun: true` cho lệnh này vì User đã duyệt nội dung commit ở bước trước, tránh việc hỏi đi hỏi lại gây rườm rà.
+> [!CAUTION]
+> **NGHIÊM CẤM:** Tuyệt đối KHÔNG merge trực tiếp vào nhánh `master`. Chỉ PM mới có quyền này.
 
-## 5. QUY TRÌNH TẠO MERGE REQUEST (MR) AUTOMATION
-- **Luồng mặc định:** Sau khi commit và push code ở nhánh local thành công, AI Agent **chủ động** đặt câu hỏi: *"Bạn có muốn tôi tự động tạo Merge Request 1 (từ nhánh local lên nhánh feature) không?"*
-- **Luồng gộp (Combo):** Nếu ngay từ đầu User yêu cầu gộp (VD: "Commit và tạo Merge Request cho tôi"), thì sau khi User duyệt Commit Message, AI sẽ **TỰ ĐỘNG** thực hiện chuỗi: `Add` ➔ `Commit` ➔ `Push` ➔ `Tạo MR 1` ➔ `Mở Browser` luôn mà **không cần hỏi lại**.
-- **MR 1 (Local => Feature):** AI sử dụng GitLab CLI (`glab mr create...`). Ngay sau đó, AI bắt buộc phải dùng lệnh `glab mr view --web` hoặc `xdg-open` để bật MR lên trình duyệt.
-- **MR 2 (Feature => Testing):** User tự thao tác thủ công sau khi MR 1 được merge.
+- **Nhánh Feature:** Tạo từ `master`, đặt tên theo cú pháp: `feature/<MÃ_SỐ_TICKET>` (Chỉ lấy phần số).
+  - *VD: `feature/12348`*
+- **Nhánh Local/Dev:** Tạo từ nhánh Feature, đặt tên: `<tên_dev>/<MÃ_SỐ_TICKET>`.
+  - *VD: `thanhdh/12348`*
+- **Luồng Merge:** `Local Branch` ➔ `Feature Branch` (qua MR) ➔ `Master` (Chỉ PM thực hiện).
+
+## 4. QUY TẮC CHO AGENT (Antigravity Protocol)
+
+Agent cần chủ động (Proactive) để giảm thiểu thao tác lặp lại cho User:
+
+1. **Khảo sát & Chuẩn bị:** Tự động chạy `git status`, `git add .` và phân tích `git diff` để soạn message.
+2. **Xác nhận & Thực thi:**
+   - Agent soạn xong message và hỏi: *"Tôi đã soạn xong commit message theo chuẩn, bạn có muốn chỉnh sửa gì không hay nhập **'OK'** để tôi push luôn nhé?"*
+   - Nếu User gõ **'OK'**: Agent tự động chạy `git commit -m "..."` và `git push` với `SafeToAutoRun: true`.
+   - Nếu User cung cấp message mới: Agent dùng message đó để commit & push.
+
+## 5. TỰ ĐỘNG HÓA MERGE REQUEST (MR)
+
+Sau khi `push` thành công, Agent hỗ trợ tạo Merge Request theo quy chuẩn:
+
+1. **Luồng mặc định (Hỏi trước):** Agent PHẢI hỏi: *"Bạn có muốn tôi hỗ trợ tạo Merge Request từ nhánh local lên feature ngay bây giờ không?"*
+   - Chỉ khi User đồng ý (OK/Có), Agent mới thực hiện lệnh `glab mr create`.
+2. **Luồng chủ động (Combo):** Chỉ khi ngay từ đầu User yêu cầu gộp (VD: *"Commit và tạo MR cho tôi"*), Agent mới thực hiện chuỗi lệnh `Add` ➔ `Commit` ➔ `Push` ➔ `Tạo MR` ➔ `Mở Browser` một cách tự động hoàn toàn.
+
+**Sử dụng GitLab CLI (`glab`):**
+```bash
+# Lệnh mẫu Agent sẽ chạy
+glab mr create --title "[CS-12348] <tóm tắt thay đổi>" \
+               --description "Review và merge code từ nhánh local lên feature." \
+               --target-branch feature/12348 \
+               --fill
+```
+
+> [!TIP]
+> Ngay sau khi tạo MR thành công, Agent dùng `glab mr view --web` để bật MR lên trình duyệt cho User.
+
